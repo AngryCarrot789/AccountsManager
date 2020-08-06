@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using AccountsManager.Helpers;
+using System.Security;
 using System.Windows;
 
 namespace AccountsManager.Login
@@ -14,7 +15,11 @@ namespace AccountsManager.Login
             set => DataContext = value;
         }
 
-        public SecureString Password => PasswordInput.SecurePassword;
+        public SecureString Password
+        {
+            get { return PasswordInput.SecurePassword; }
+            set { PasswordInput.Password = value.GetUnsecure(); }
+        }
 
         public LoginWindow()
         {

@@ -1,0 +1,111 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccountsManager" xmlns:account="clr-namespace:AccountsManager.Account"
+        xmlns:Converters="clr-namespace:AccountsManager.Converters" x:Class="AccountsManager.Views.MainWindow"
+        mc:Ignorable="d"
+        Title="Main Window" 
+        Height="720" Width="1280"
+        Style="{DynamicResource CustomWindowStyle}"
+        Background="{DynamicResource ContainerBackground}">
+    <Window.Resources>
+        <Converters:ShowHideButtonConverter x:Key="ShowHideButtonConverter"/>
+    </Window.Resources>
+    <Grid Margin="5 5 0 5">
+        <Grid>
+            <Grid HorizontalAlignment="Left" Width="245">
+                <Label Content="Toolbox" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Top" Height="40"/>
+                <Grid Margin="0,40,0,0">
+                    <Button Command="{Binding ShowCreatorCommand}" Content="Add" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="48"/>
+                    <Button Command="{Binding AutoShowEditorPanelCommand}" Content="{Binding EditorPanelExpanded, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ShowHideButtonConverter}}" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="48" Margin="0,53,0,0"/>
+
+                </Grid>
+            </Grid>
+            <Grid Margin="250,0,0,0">
+                <Label Content="Accounts List" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" VerticalAlignment="Top" Height="40"/>
+                <DockPanel Margin="0,40,0,0">
+                    <Grid x:Name="EditorPanel" DockPanel.Dock="Right" Width="330">
+                        <Grid DataContext="{Binding SelectedAccount, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="320">
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Width="250">
+                                <Label Padding="8" Content="Account Name:" HorizontalAlignment="Left" Margin="0"/>
+                                <TextBox Text="{Binding AccountName, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalContentAlignment="Center" Margin="102,0,0,0" IsReadOnly="True"/>
+                            </Grid>
+                            <Grid Margin="0,36,0,0">
+                                <Border BorderBrush="{DynamicResource ControlDefaultBorderBrush}" Height="192" VerticalAlignment="Top">
+                                    <Grid>
+                                        <Label Padding="8" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                                        <Label Padding="8" Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,43,0,0"/>
+                                        <Label Padding="8" Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,80,0,0"/>
+                                        <Label Padding="8" Content="Date of Birth" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,117,0,0"/>
+                                        <Label Padding="8" Content="Security Info" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,154,0,0"/>
+                                        <Border Background="{DynamicResource BackgroundColour}" BorderBrush="{DynamicResource ContainerBorder}" BorderThickness="1 1 0 1" Margin="82,0,0,0">
+                                            <Grid>
+                                                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"         Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"      Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,42,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}"   Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,116,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding SecurityInfo, UpdateSourceTrigger=PropertyChanged}"  Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,153,60,0" Height="32" IsReadOnly="True"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="e" Content="Copy" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="u" Content="Copy" HorizontalAlignment="Right" Margin="0,42,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Grid Margin="5,79,5,0" VerticalAlignment="Top" Height="32">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="113*"/>
+                                                        <ColumnDefinition Width="114*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Button Command="{Binding ShowPasswordCommand}" Content="Show" Margin="0,0,3,0"/>
+                                                    <Button Command="{Binding CopyDetails}" CommandParameter="p" Content="Copy" Grid.Column="1" Margin="2,0,0,0"/>
+                                                </Grid>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="d" Content="Copy" HorizontalAlignment="Right" Margin="0,116,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="s" Content="Copy" HorizontalAlignment="Right" Margin="0,153,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <Grid Margin="0,192,0,0" Height="40" VerticalAlignment="Top">
+                                    <TextBlock Text="Extra information (Codes, Websites, etc)" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Border VerticalAlignment="Top" Height="192" Margin="0,232,0,0">
+                                    <Grid>
+                                        <Label Padding="8" Content="Extra Info 1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+                                        <Label Padding="8" Content="Extra Info 2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,43,0,0"/>
+                                        <Label Padding="8" Content="Extra Info 3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,80,0,0"/>
+                                        <Label Padding="8" Content="Extra Info 4" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,117,0,0"/>
+                                        <Label Padding="8" Content="Extra Info 5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,154,0,0"/>
+                                        <Border Background="{DynamicResource BackgroundColour}" BorderBrush="{DynamicResource ContainerBorder}" BorderThickness="1 1 0 1" Margin="82,0,0,0">
+                                            <Grid>
+                                                <TextBox Text="{Binding ExtraInfo1, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding ExtraInfo2, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,42,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding ExtraInfo3, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,79,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding ExtraInfo4, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,116,60,0" Height="32" IsReadOnly="True"/>
+                                                <TextBox Text="{Binding ExtraInfo5, UpdateSourceTrigger=PropertyChanged}" Padding="5" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,153,60,0" Height="32" IsReadOnly="True"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="1" Content="Copy" HorizontalAlignment="Right" Margin="0,5,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="2" Content="Copy" HorizontalAlignment="Right" Margin="0,42,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="3" Content="Copy" HorizontalAlignment="Right" Margin="0,79,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="4" Content="Copy" HorizontalAlignment="Right" Margin="0,116,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                                <Button Command="{Binding CopyDetails}" CommandParameter="5" Content="Copy" HorizontalAlignment="Right" Margin="0,153,5,0" VerticalAlignment="Top" Width="50" Height="32"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <ListBox ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding SelectedAccount, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalContentAlignment="Stretch"
+                             HorizontalAlignment="Stretch"
+                             BorderThickness="1"
+                             BorderBrush="{DynamicResource ControlDefaultBorderBrush}" 
+                             Background="{DynamicResource BackgroundColour}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <account:AccountItem DataContext="{Binding}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

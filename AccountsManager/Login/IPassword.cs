@@ -4,6 +4,6 @@ namespace AccountsManager.Login
 {
     public interface IPassword
     {
-        SecureString Password { get; }
+        SecureString Password { get; set; }
     }
 }

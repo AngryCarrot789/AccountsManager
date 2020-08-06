@@ -47,6 +47,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -56,13 +57,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Account\SecureHelper.cs" />
+    <Compile Include="Account\AccountItem.xaml.cs">
+      <DependentUpon>AccountItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\AccountViewModel.cs" />
+    <Compile Include="Account\IO\AccountHelper.cs" />
+    <Compile Include="Account\IO\AccountLoader.cs" />
+    <Compile Include="Account\IO\UnsecureAccountModel.cs" />
+    <Compile Include="Account\IO\AccountSaver.cs" />
+    <Compile Include="CClipboard\CustomClipboard.cs" />
+    <Compile Include="Converters\ShowHideButtonConverter.cs" />
+    <Compile Include="Helpers\SecureHelper.cs" />
     <Compile Include="AppInstance\ThisApplication.cs" />
     <Compile Include="Login\IPassword.cs" />
     <Compile Include="Login\LoginViewModel.cs" />
     <Compile Include="Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Security\Encryption.cs" />
     <Compile Include="Themes\ColourfulDarkTheme.xaml.cs">
       <DependentUpon>ColourfulDarkTheme.xaml</DependentUpon>
     </Compile>
@@ -79,12 +91,26 @@
     <Compile Include="Utilities\BaseViewModel.cs" />
     <Compile Include="Utilities\Command.cs" />
     <Compile Include="Utilities\CommandParam.cs" />
+    <Compile Include="ViewModels\AccountCreatorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\AccountCreatorWindow.xaml.cs">
+      <DependentUpon>AccountCreatorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interfaces\IAccountCreator.cs" />
+    <Compile Include="Views\Interfaces\IMainWindow.cs" />
+    <Page Include="Account\AccountItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\AccountCreatorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,7 +118,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -139,8 +165,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

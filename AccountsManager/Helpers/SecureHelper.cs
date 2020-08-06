@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace AccountsManager.Account
+namespace AccountsManager.Helpers
 {
     public static class SecureHelper
     {

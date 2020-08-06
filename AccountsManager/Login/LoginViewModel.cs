@@ -1,11 +1,7 @@
 ﻿using AccountsManager.Account;
 using AccountsManager.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using AccountsManager.Helpers;
 using System.Windows.Input;
 
 namespace AccountsManager.Login
@@ -14,18 +10,18 @@ namespace AccountsManager.Login
     {
         public IPassword Password { get; private set; }
 
-        public ICommand ShowPasswordCommand { get; }
+        public ICommand LoginCommand { get; }
 
         public LoginViewModel(IPassword password)
         {
             Password = password;
 
-            ShowPasswordCommand = new Command(ShowPassword);
+            LoginCommand = new Command(Login);
         }
 
-        public void ShowPassword()
+        public void Login()
         {
-            MessageBox.Show(Password.Password.GetUnsecure());
+            string pass = Password.Password.GetUnsecure();
         }
     }
 }
